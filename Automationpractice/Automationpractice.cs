@@ -12,9 +12,11 @@ namespace Automationpractice
     public class Automationpractice
     {
         private IWebDriver _driver;
+
         private MainPage mainPage;
         private AuthenticationPage authenticationPage;
         private OrderPage orderPage;
+        private CheckoutPage checkoutpage;
 
         [SetUp]
         public void SetUpTest()
@@ -22,9 +24,12 @@ namespace Automationpractice
             _driver = new ChromeDriver();
             _driver.Navigate().GoToUrl("http://automationpractice.com/");
             _driver.Manage().Window.Maximize();
+
             mainPage = new MainPage(_driver);
             authenticationPage = new AuthenticationPage(_driver);
             orderPage = new OrderPage(_driver);
+            checkoutpage = new CheckoutPage(_driver);
+
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
 
@@ -39,7 +44,7 @@ namespace Automationpractice
         public void SignIn()
         {
             mainPage.GoToAuthenticationPage();
-            authenticationPage.SignIn();            
+            authenticationPage.SignIn();
         }
 
         [Test]
@@ -48,12 +53,19 @@ namespace Automationpractice
             mainPage.GoToAuthenticationPage();
             authenticationPage.SignIn();
             mainPage.SearchTshirts();
-            mainPage.AddToCart();
+            checkoutpage.AddToCart();
             orderPage.BuyTshirt();
         }
 
+       /* [Test]
+        public void BuyDressesFromAdvancedSearch()
+        {
+            mainPage.GoToAuthenticationPage();
+            authenticationPage.SignIn();
+        }*/
+
         [TearDown]
-        public void TearDownTest()
+        public void TearDownTest() 
         {
             _driver.Quit();
         }

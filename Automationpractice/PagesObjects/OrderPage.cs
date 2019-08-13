@@ -41,18 +41,66 @@ namespace Automationpractice.PagesObjects
 
         [FindsBy(How = How.XPath, Using = "//*[@class='cheque-indent']//strong[@class='dark']")]
         public IWebElement titleOrder;
+
+        [FindsBy(How = How.XPath, Using = "//i[@class='icon-plus']")]
+        public IWebElement increaseQuantityButton;
+
+        [FindsBy(How = How.XPath, Using = "//*[@class='cart_total']//span[@class='price']")]
+        public IWebElement totalCostSummary;
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='address_invoice']//*[@class='address_update']//a")]
+        public IWebElement updateBillungAddressButton;
+
+        [FindsBy(How = How.XPath, Using = "//input[@id='alias']")]
+        public IWebElement addressTitleField;
+
+        [FindsBy(How = How.XPath, Using = "//button[@id='submitAddress']")]
+        public IWebElement submitAddressButton;
+
+        [FindsBy(How = How.XPath, Using = "//select[@id='id_address_delivery']//option")]
+        public IWebElement deliveryAddress;
+        
         
 
+        public void Summary()
+        {
+            increaseQuantityButton.Click();
+            checkoutSummaryButton.Click();
+            Assert.IsTrue(totalCostSummary.Text.Equals("$49.53"));
+        }
+
+        public void Address()
+        {
+            updateBillungAddressButton.Click();
+            addressTitleField.SendKeys("CosmosStar");
+            submitAddressButton.Click();
+            checkoutAddressButton.Click();
+            Assert.IsTrue(deliveryAddress.Text.Equals("CosmosStar"));
+        }
+
+        public void Shipping()
+        {
+            agreeShippingCheckBox.Click();
+            checkoutShippingButton.Click();
+        }
+
+        public void Payment()
+        {
+            payByBankWireButton.Click();
+            confirmOrderButton.Click();
+        }
 
         public void BuyTshirt()
         {
-            checkoutSummaryButton.Click();
-            checkoutAddressButton.Click();
-            agreeShippingCheckBox.Click();
-            checkoutShippingButton.Click();
-            payByBankWireButton.Click();
-            confirmOrderButton.Click();
+            Summary();
+            Address();
+            Shipping();
+            Payment();
             Assert.IsTrue(titleOrder.Text.Equals("Your order on My Store is complete."));
         }
+
+        
+
+
     }
 }

@@ -20,12 +20,7 @@ namespace Automationpractice.PagesObjects
         }
 
         [FindsBy(How = How.XPath, Using = "//a[@class='login']")]
-        public IWebElement SignInLink;
-
-        public void GoToAuthenticationPage()
-        {
-            SignInLink.Click();
-        }
+        public IWebElement SignInLink;       
 
         [FindsBy(How = How.XPath, Using = "//input[@id='search_query_top']")]
         public IWebElement searchQueryTopField;
@@ -36,25 +31,21 @@ namespace Automationpractice.PagesObjects
         [FindsBy(How = How.XPath, Using = "//h1[@itemprop]")]
         public IWebElement titleTshirtResult;
 
-        [FindsBy(How = How.XPath, Using = "//button[@name='Submit']")]
-        public IWebElement addToCartButton;
-
+        public void GoToAuthenticationPage()
+        {
+            SignInLink.Click();
+        }
 
         public void SearchTshirts()
         {
             searchQueryTopField.SendKeys("t-shirts");
             resultSearchField.Click();
-            Assert.IsTrue(titleTshirtResult.Text.Equals("Faded Short Sleeve T-shirts"));
+            Assert.IsTrue(titleTshirtResult.Text.Equals("Faded Short Sleeve T-shirts"));            
         }
 
-        [FindsBy(How = How.XPath, Using = "//a[@title='Proceed to checkout']")]
-        public IWebElement proceedToCheckoutButton;
+        
 
-        public void AddToCart()
-        {
-            addToCartButton.Click();
-            proceedToCheckoutButton.Click();
-        }
+
 
     }
 }

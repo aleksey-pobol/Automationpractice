@@ -80,6 +80,14 @@ namespace Automationpractice.PagesObjects
         [FindsBy(How = How.XPath, Using = "//*[@class='header_user_info']/a/span")]
         public IWebElement headerUserInfo;
 
+        [FindsBy(How = How.XPath, Using = "//input[@id='email']")]
+        public IWebElement emailSignInField;
+
+        [FindsBy(How = How.XPath, Using = "//input[@id='passwd']")]
+        public IWebElement passwordSignInField;
+
+        [FindsBy(How = How.XPath, Using = "//button[@id='SubmitLogin']")]
+        public IWebElement submitLoginButton;
 
         public void CreateAnAccount()
         {
@@ -101,24 +109,13 @@ namespace Automationpractice.PagesObjects
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='header_user_info']/a/span")));
             Assert.IsTrue(headerUserInfo.Text.Equals(Firstname + ' ' + Lasttname));
-        }
-
-        [FindsBy(How = How.XPath, Using = "//input[@id='email']")]
-        public IWebElement emailSignInField;
-
-        [FindsBy(How = How.XPath, Using = "//input[@id='passwd']")]
-        public IWebElement passwordSignInField;
-
-        [FindsBy(How = How.XPath, Using = "//button[@id='SubmitLogin']")]
-        public IWebElement submitLoginButton;
+        }       
         
         public void SignIn()
         {
             emailSignInField.SendKeys(Email);
             passwordSignInField.SendKeys(Password);
-            submitLoginButton.Click();
-            /*WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='header_user_info']/a/span")));*/
+            submitLoginButton.Click();            
             Assert.IsTrue(headerUserInfo.Text.Equals(Firstname + ' ' + Lasttname));
         }
         
