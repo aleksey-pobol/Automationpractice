@@ -11,7 +11,7 @@ namespace Automationpractice.PagesObjects
 {
     class MainPage
     {
-        private readonly IWebDriver _driver;
+        private readonly IWebDriver _driver;        
 
         public MainPage(IWebDriver driver)
         {
@@ -36,16 +36,12 @@ namespace Automationpractice.PagesObjects
             SignInLink.Click();
         }
 
-        public void SearchTshirts()
+        public void SearchItem(String item)
         {
-            searchQueryTopField.SendKeys("t-shirts");
+            searchQueryTopField.SendKeys(item);
             resultSearchField.Click();
-            Assert.IsTrue(titleTshirtResult.Text.Equals("Faded Short Sleeve T-shirts"));            
+            Assert.IsTrue(titleTshirtResult.Text.Equals(item));            
         }
-
         
-
-
-
     }
 }

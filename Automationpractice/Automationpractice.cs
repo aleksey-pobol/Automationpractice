@@ -18,6 +18,11 @@ namespace Automationpractice
         private OrderPage orderPage;
         private CheckoutPage checkoutpage;
 
+        private String firstname = "Aleksey";
+        private String lasttname = "Pobol";
+        private String email = "test3@mail.com";
+        private String password = "aleksey96";
+
         [SetUp]
         public void SetUpTest()
         {
@@ -28,7 +33,7 @@ namespace Automationpractice
             mainPage = new MainPage(_driver);
             authenticationPage = new AuthenticationPage(_driver);
             orderPage = new OrderPage(_driver);
-            checkoutpage = new CheckoutPage(_driver);
+            checkoutpage = new CheckoutPage(_driver);           
 
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
@@ -44,26 +49,20 @@ namespace Automationpractice
         public void SignIn()
         {
             mainPage.GoToAuthenticationPage();
-            authenticationPage.SignIn();
+            authenticationPage.SignIn(email, password, firstname, lasttname);
         }
 
         [Test]
-        public void BuyTshirt()
+        public void BuyItem()
         {
             mainPage.GoToAuthenticationPage();
-            authenticationPage.SignIn();
-            mainPage.SearchTshirts();
-            checkoutpage.AddToCart();
-            orderPage.BuyTshirt();
+            authenticationPage.SignIn(email,password,firstname,lasttname);
+            mainPage.SearchItem("Faded Short Sleeve T-shirts");
+            checkoutpage.AddToCart(1);
+            orderPage.BuyItem();
+
         }
-
-       /* [Test]
-        public void BuyDressesFromAdvancedSearch()
-        {
-            mainPage.GoToAuthenticationPage();
-            authenticationPage.SignIn();
-        }*/
-
+              
         [TearDown]
         public void TearDownTest() 
         {

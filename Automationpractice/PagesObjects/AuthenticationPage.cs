@@ -15,10 +15,10 @@ namespace Automationpractice.PagesObjects
     class AuthenticationPage
     {
         private readonly IWebDriver _driver;
-        private String Firstname = "Aleksey";
-        private String Lasttname = "Pobol";
-        private String Email = "test3@mail.com";
-        private String Password = "aleksey96";
+        private String firstname = "Aleksey";
+        private String lasttname = "Pobol";
+        private String email = "test3@mail.com";
+        private String password = "aleksey96";
 
         
         public String randomEmail()
@@ -93,8 +93,8 @@ namespace Automationpractice.PagesObjects
         {
             emailCreateField.SendKeys(randomEmail());
             submitCreateButton.Click();
-            customerFirstnameField.SendKeys(Firstname);
-            customerLastameField.SendKeys(Lasttname);
+            customerFirstnameField.SendKeys(firstname);
+            customerLastameField.SendKeys(lasttname);
             emailRegField.Click();
             passwdField.SendKeys("aleksey96");
             regAdressField.SendKeys("Minsk");
@@ -108,15 +108,15 @@ namespace Automationpractice.PagesObjects
             submitAccountButton.Click();
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='header_user_info']/a/span")));
-            Assert.IsTrue(headerUserInfo.Text.Equals(Firstname + ' ' + Lasttname));
+            Assert.IsTrue(headerUserInfo.Text.Equals(firstname + ' ' + lasttname));
         }       
         
-        public void SignIn()
+        public void SignIn(String email, String password, String firstname, String lasttname)
         {
-            emailSignInField.SendKeys(Email);
-            passwordSignInField.SendKeys(Password);
+            emailSignInField.SendKeys(email);
+            passwordSignInField.SendKeys(password);
             submitLoginButton.Click();            
-            Assert.IsTrue(headerUserInfo.Text.Equals(Firstname + ' ' + Lasttname));
+            Assert.IsTrue(headerUserInfo.Text.Equals(firstname + ' ' + lasttname));
         }
         
 

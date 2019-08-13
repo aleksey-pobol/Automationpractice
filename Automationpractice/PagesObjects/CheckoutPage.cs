@@ -32,16 +32,20 @@ namespace Automationpractice.PagesObjects
 
         [FindsBy(How = How.XPath, Using = "//h1[@id='cart_title']")]
         public IWebElement cartTitle;
-        
 
-        public void IncreaseQuantity()
+
+        public void IncreaseQuantity(int countItem)
         {
-            increaseQuantityButton.Click();
+            for (int i = 1; i < countItem; i++)
+            {
+                increaseQuantityButton.Click();
+            }
+
         }
 
-        public void AddToCart()
+        public void AddToCart(int countItem)
         {
-            IncreaseQuantity();
+            IncreaseQuantity(countItem);
             addToCartButton.Click();
             proceedToCheckoutButton.Click();
             Assert.IsTrue(cartTitle.Text.Equals("SHOPPING-CART SUMMARY"));

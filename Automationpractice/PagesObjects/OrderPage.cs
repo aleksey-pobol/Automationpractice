@@ -59,23 +59,28 @@ namespace Automationpractice.PagesObjects
 
         [FindsBy(How = How.XPath, Using = "//select[@id='id_address_delivery']//option")]
         public IWebElement deliveryAddress;
-        
-        
 
-        public void Summary()
+        public void IncreaseQuantity(int countItem)
         {
-            increaseQuantityButton.Click();
-            checkoutSummaryButton.Click();
-            Assert.IsTrue(totalCostSummary.Text.Equals("$49.53"));
+            for (int i = 1; i < countItem; i++)
+            {
+                increaseQuantityButton.Click();
+            }
         }
 
-        public void Address()
+        public void Summary(int countItem)
+        {
+            IncreaseQuantity(countItem);
+            checkoutSummaryButton.Click();            
+        }
+
+        public void Address(String address)
         {
             updateBillungAddressButton.Click();
-            addressTitleField.SendKeys("CosmosStar");
+            addressTitleField.SendKeys(address);
             submitAddressButton.Click();
             checkoutAddressButton.Click();
-            Assert.IsTrue(deliveryAddress.Text.Equals("CosmosStar"));
+            Assert.IsTrue(deliveryAddress.Text.Equals(address));
         }
 
         public void Shipping()
@@ -90,10 +95,10 @@ namespace Automationpractice.PagesObjects
             confirmOrderButton.Click();
         }
 
-        public void BuyTshirt()
+        public void BuyItem()
         {
-            Summary();
-            Address();
+            Summary(1);
+            Address("CosmosStar");
             Shipping();
             Payment();
             Assert.IsTrue(titleOrder.Text.Equals("Your order on My Store is complete."));
