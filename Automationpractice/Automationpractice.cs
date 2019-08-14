@@ -32,8 +32,8 @@ namespace Automationpractice
 
             mainPage = new MainPage(_driver);
             authenticationPage = new AuthenticationPage(_driver);
-            orderPage = new OrderPage(_driver);
-            checkoutpage = new CheckoutPage(_driver);           
+            checkoutpage = new CheckoutPage(_driver);
+            orderPage = new OrderPage(_driver);                   
 
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
