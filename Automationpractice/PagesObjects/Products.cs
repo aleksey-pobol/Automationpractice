@@ -10,15 +10,16 @@ using System;
 
 namespace Automationpractice.PagesObjects
 {
-    class Products
+    static class Products
     {
+        
 
-        String tshirts = "Faded Short Sleeve T-shirts";
-        String blouse = "Blouse";
+        static String tshirts = "Faded Short Sleeve T-shirts";
+
+       /* String blouse = "Blouse";
         String printedDress = "Printed Dress";
         String printedSummerDress = "Printed Summer Dress";
         String printedChiffonDress = "Printed Chiffon Dress";
-
-
+                */
     }
 }

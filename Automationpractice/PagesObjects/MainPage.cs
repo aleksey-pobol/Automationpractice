@@ -11,7 +11,7 @@ namespace Automationpractice.PagesObjects
 {
     class MainPage
     {
-        private readonly IWebDriver _driver;        
+        private readonly IWebDriver _driver;
 
         public MainPage(IWebDriver driver)
         {
@@ -20,7 +20,7 @@ namespace Automationpractice.PagesObjects
         }
 
         [FindsBy(How = How.XPath, Using = "//a[@class='login']")]
-        public IWebElement SignInLink;       
+        public IWebElement SignInLink;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='search_query_top']")]
         public IWebElement searchQueryTopField;
@@ -40,8 +40,8 @@ namespace Automationpractice.PagesObjects
         {
             searchQueryTopField.SendKeys(item);
             resultSearchField.Click();
-            Assert.IsTrue(titleTshirtResult.Text.Equals(item));            
+            Assert.IsTrue(titleTshirtResult.Text.Equals(item));
         }
-        
+
     }
 }

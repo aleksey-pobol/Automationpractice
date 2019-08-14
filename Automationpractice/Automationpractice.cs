@@ -5,6 +5,9 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
 using Automationpractice.PagesObjects;
+using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Gherkin.Model;
 
 namespace Automationpractice
 {
@@ -18,10 +21,19 @@ namespace Automationpractice
         private OrderPage orderPage;
         private CheckoutPage checkoutpage;
 
+
         private String firstname = "Aleksey";
         private String lasttname = "Pobol";
         private String email = "test3@mail.com";
         private String password = "aleksey96";
+
+
+        //---Extent Reporting----------
+        private static ExtentTest featureName;
+        private static ExtentTest scenario;
+        private static ExtentReports extent; 
+        //------------------------------
+        
 
         [SetUp]
         public void SetUpTest()
@@ -33,9 +45,21 @@ namespace Automationpractice
             mainPage = new MainPage(_driver);
             authenticationPage = new AuthenticationPage(_driver);
             checkoutpage = new CheckoutPage(_driver);
-            orderPage = new OrderPage(_driver);                   
-
+            orderPage = new OrderPage(_driver);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+
+            var htmlReporter = new ExtentHtmlReporter(@"D:\ExtentReport.html");
+            htmlReporter.Configuration().Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
+            extent = new ExtentReports();
+            extent.AttachReporter(htmlReporter);
+
+            //Feature
+            var feature = extent.CreateTest<Feature>("SignIn");
+            //Scenario
+            var scenario = feature.CreateNode<Scenario>("Login user as " + firstname); 
+            //Steps
+            scenario.CreateNode<Given>("SignIn");           
+
         }
 
         [Test]
@@ -44,7 +68,7 @@ namespace Automationpractice
             mainPage.GoToAuthenticationPage();
             authenticationPage.CreateAnAccount();
         }
-
+        
         [Test]
         public void SignIn()
         {
@@ -56,16 +80,16 @@ namespace Automationpractice
         public void BuyItem()
         {
             mainPage.GoToAuthenticationPage();
-            authenticationPage.SignIn(email,password,firstname,lasttname);
-            mainPage.SearchItem("Faded Short Sleeve T-shirts");
+            authenticationPage.SignIn(email, password, firstname, lasttname);
+            mainPage.SearchItem("Faded Short Sleeve T-shirts");            
             checkoutpage.AddToCart(1);
-            orderPage.BuyItem();
-
+            orderPage.BuyItem();            
         }
-              
+
         [TearDown]
-        public void TearDownTest() 
+        public void TearDownTest()
         {
+            extent.Flush();
             _driver.Quit();
         }
 

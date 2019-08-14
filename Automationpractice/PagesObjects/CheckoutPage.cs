@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace Automationpractice.PagesObjects
 {
@@ -30,8 +31,8 @@ namespace Automationpractice.PagesObjects
         [FindsBy(How = How.XPath, Using = "//i[@class='icon-plus']")]
         public IWebElement increaseQuantityButton;
 
-        [FindsBy(How = How.XPath, Using = "//h1[@id='cart_title']")]
-        public IWebElement cartTitle;
+        [FindsBy(How = How.XPath, Using = "//span[@class='navigation_page']")]
+        public IWebElement navigationPagetTitle;
 
 
         public void IncreaseQuantity(int countItem)
@@ -47,8 +48,8 @@ namespace Automationpractice.PagesObjects
         {
             IncreaseQuantity(countItem);
             addToCartButton.Click();
-            proceedToCheckoutButton.Click();
-            Assert.IsTrue(cartTitle.Text.Equals("SHOPPING-CART SUMMARY"));
+            proceedToCheckoutButton.Click();            
+            Assert.IsTrue(navigationPagetTitle.Text.Equals("Your shopping cart"));
         }
 
     }

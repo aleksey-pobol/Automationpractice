@@ -20,7 +20,7 @@ namespace Automationpractice.PagesObjects
         private String email = "test3@mail.com";
         private String password = "aleksey96";
 
-        
+
         public String randomEmail()
         {
             Random rnd = new Random(Environment.TickCount);
@@ -109,16 +109,16 @@ namespace Automationpractice.PagesObjects
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='header_user_info']/a/span")));
             Assert.IsTrue(headerUserInfo.Text.Equals(firstname + ' ' + lasttname));
-        }       
-        
+        }
+
         public void SignIn(String email, String password, String firstname, String lasttname)
         {
             emailSignInField.SendKeys(email);
             passwordSignInField.SendKeys(password);
-            submitLoginButton.Click();            
+            submitLoginButton.Click();
             Assert.IsTrue(headerUserInfo.Text.Equals(firstname + ' ' + lasttname));
         }
-        
+
 
     }
 }
