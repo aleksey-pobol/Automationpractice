@@ -31,9 +31,9 @@ namespace Automationpractice
         //---Extent Reporting----------
         private static ExtentTest featureName;
         private static ExtentTest scenario;
-        private static ExtentReports extent; 
+        private static ExtentReports extent;
         //------------------------------
-        
+
 
         [SetUp]
         public void SetUpTest()
@@ -53,13 +53,14 @@ namespace Automationpractice
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
 
+            //---Extent Reporting----------
             //Feature
             var feature = extent.CreateTest<Feature>("SignIn");
             //Scenario
-            var scenario = feature.CreateNode<Scenario>("Login user as " + firstname); 
+            var scenario = feature.CreateNode<Scenario>("Login user as " + firstname);
             //Steps
-            scenario.CreateNode<Given>("SignIn");           
-
+            scenario.CreateNode<Given>("SignIn");
+            //------------------------------
         }
 
         [Test]
@@ -68,7 +69,7 @@ namespace Automationpractice
             mainPage.GoToAuthenticationPage();
             authenticationPage.CreateAnAccount();
         }
-        
+
         [Test]
         public void SignIn()
         {
@@ -81,9 +82,18 @@ namespace Automationpractice
         {
             mainPage.GoToAuthenticationPage();
             authenticationPage.SignIn(email, password, firstname, lasttname);
-            mainPage.SearchItem("Faded Short Sleeve T-shirts");            
+            mainPage.SearchItem("Faded Short Sleeve T-shirts");
             checkoutpage.AddToCart(1);
-            orderPage.BuyItem();            
+            orderPage.BuyItem();
+        }
+
+        [Test]
+        public void CompareItem()
+        {
+            mainPage.FindItemFromMenu();
+            mainPage.ChooseCountForAddToCompare(3);
+            mainPage.CompareItems();
+            Thread.Sleep(3000);
         }
 
         [TearDown]
