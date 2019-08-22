@@ -96,7 +96,7 @@
     <Compile Include="Automationpractice.cs" />
     <Compile Include="PagesObjects\AuthenticationPage.cs" />
     <Compile Include="PagesObjects\CheckoutPage.cs" />
-    <Compile Include="PagesObjects\Products.cs" />
+    <Compile Include="PagesObjects\ProductsPage.cs" />
     <Compile Include="PagesObjects\MainPage.cs" />
     <Compile Include="PagesObjects\OrderPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

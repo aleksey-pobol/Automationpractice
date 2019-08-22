@@ -20,6 +20,7 @@ namespace Automationpractice
         private AuthenticationPage authenticationPage;
         private OrderPage orderPage;
         private CheckoutPage checkoutpage;
+        private ProductsPage productsPage;
 
 
         private String firstname = "Aleksey";
@@ -40,20 +41,23 @@ namespace Automationpractice
         {
             _driver = new ChromeDriver();
             _driver.Navigate().GoToUrl("http://automationpractice.com/");
-            _driver.Manage().Window.Maximize();
+            _driver.Manage().Window.Maximize();  
+            
 
             mainPage = new MainPage(_driver);
             authenticationPage = new AuthenticationPage(_driver);
             checkoutpage = new CheckoutPage(_driver);
             orderPage = new OrderPage(_driver);
+            productsPage = new ProductsPage(_driver);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
+
+            //---Extent Reporting----------
             var htmlReporter = new ExtentHtmlReporter(@"D:\ExtentReport.html");
             htmlReporter.Configuration().Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
-
-            //---Extent Reporting----------
+                        
             //Feature
             var feature = extent.CreateTest<Feature>("SignIn");
             //Scenario
@@ -82,7 +86,7 @@ namespace Automationpractice
         {
             mainPage.GoToAuthenticationPage();
             authenticationPage.SignIn(email, password, firstname, lasttname);
-            mainPage.SearchItem("Faded Short Sleeve T-shirts");
+            mainPage.FindItem("Faded Short Sleeve T-shirts");
             checkoutpage.AddToCart(1);
             orderPage.BuyItem();
         }
@@ -90,10 +94,17 @@ namespace Automationpractice
         [Test]
         public void CompareItem()
         {
-            mainPage.FindItemFromMenu();
-            mainPage.ChooseCountForAddToCompare(3);
-            mainPage.CompareItems();
-            Thread.Sleep(3000);
+            mainPage.FindItemFromSubmenu(mainPage.dressesMenuItem, mainPage.casualDressesSubmenuItem);
+            productsPage.ChooseCountForAddToCompare(3);
+            productsPage.CompareItems();            
+        }
+
+        [Test]
+        public void ComparePriceRange()
+        {
+            mainPage.GoToMenu(mainPage.dressesMenuItem);
+            productsPage.ChangePriceRange();
+            productsPage.ComparePriceRange();
         }
 
         [TearDown]
