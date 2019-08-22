@@ -66,6 +66,14 @@ namespace Automationpractice.PagesObjects
         {
             menuLocator.Click();
         }
-        
+
+        public void ScrollPageWithJS()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+            int part = 1;
+            String script = String.Format("window.scrollTo(0, document.body.scrollHeight * {p})", part);
+            js.ExecuteScript(script);
+
+        }
     }
 }

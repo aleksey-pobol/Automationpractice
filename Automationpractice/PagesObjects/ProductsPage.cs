@@ -33,6 +33,10 @@ namespace Automationpractice.PagesObjects
         [FindsBy(How = How.XPath, Using = "//*[@id='layered_price_slider']")]
         public IWebElement sliderRange;
 
+        [FindsBy(How = How.XPath, Using = "//span[@id='layered_price_range']")]
+        public IWebElement priceRange;
+        
+
         public void ChooseCountForAddToCompare(int countOfPluses)
         {
             int count = 1;
@@ -86,8 +90,8 @@ namespace Automationpractice.PagesObjects
         }
 
         public void ComparePriceRange()
-        {
-            //Assert.IsTrue(sliderRange.Text.Equals("20.07 - 40.05"));
+        {            
+            Assert.IsTrue(priceRange.Text.Equals("$20.07 - $40.05"));
         }
 
         /*static String tshirts = "Faded Short Sleeve T-shirts";

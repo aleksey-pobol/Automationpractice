@@ -107,6 +107,12 @@ namespace Automationpractice
             productsPage.ComparePriceRange();
         }
 
+        [Test]
+        public void JavascriptExecuteTest()
+        {
+            mainPage.ScrollPageWithJS();
+        }
+
         [TearDown]
         public void TearDownTest()
         {
