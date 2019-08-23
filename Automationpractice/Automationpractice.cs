@@ -107,7 +107,7 @@ namespace Automationpractice
         [Test]
         public void JavascriptExecuteTest()
         {
-            mainPage.ScrollPageByJS();
+            //mainPage.ScrollPageByJS();
         }
 
         [TearDown]
