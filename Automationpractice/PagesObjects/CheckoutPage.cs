@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
-using System;
-using System.Threading;
 
 namespace Automationpractice.PagesObjects
 {
@@ -23,17 +18,16 @@ namespace Automationpractice.PagesObjects
         }
 
         [FindsBy(How = How.XPath, Using = "//button[@name='Submit']")]
-        public IWebElement addToCartButton;
+        private IWebElement addToCartButton;
 
         [FindsBy(How = How.XPath, Using = "//a[@title='Proceed to checkout']")]
-        public IWebElement proceedToCheckoutButton;
+        private IWebElement proceedToCheckoutButton;
 
         [FindsBy(How = How.XPath, Using = "//i[@class='icon-plus']")]
-        public IWebElement increaseQuantityButton;
+        private IWebElement increaseQuantityButton;
 
         [FindsBy(How = How.XPath, Using = "//span[@class='navigation_page']")]
-        public IWebElement navigationPagetTitle;
-
+        private IWebElement navigationPagetTitle;
 
         public void IncreaseQuantity(int countItem)
         {
@@ -41,7 +35,6 @@ namespace Automationpractice.PagesObjects
             {
                 increaseQuantityButton.Click();
             }
-
         }
 
         public void AddToCart(int countItem)
@@ -51,6 +44,5 @@ namespace Automationpractice.PagesObjects
             proceedToCheckoutButton.Click();            
             Assert.IsTrue(navigationPagetTitle.Text.Equals("Your shopping cart"));
         }
-
     }
 }

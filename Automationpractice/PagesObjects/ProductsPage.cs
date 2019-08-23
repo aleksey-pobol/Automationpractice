@@ -1,13 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using OpenQA.Selenium.Support.UI;
 
 namespace Automationpractice.PagesObjects
 {
@@ -22,19 +21,19 @@ namespace Automationpractice.PagesObjects
         }
 
         [FindsBy(How = How.XPath, Using = "//div[@class='content_sortPagiBar']//button[@type='submit']")]
-        public IWebElement submitCompareButton;
+        private IWebElement submitCompareButton;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='layered_price_slider']/a[1]")]
-        public IWebElement leftsSlider;
+        private IWebElement leftsSlider;
                 
         [FindsBy(How = How.XPath, Using = "//*[@id='layered_price_slider']/a[2]")]
-        public IWebElement rightSlider;
+        private IWebElement rightSlider;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='layered_price_slider']")]
-        public IWebElement sliderRange;
+        private IWebElement sliderRange;
 
         [FindsBy(How = How.XPath, Using = "//span[@id='layered_price_range']")]
-        public IWebElement priceRange;
+        private IWebElement priceRange;
         
 
         public void ChooseCountForAddToCompare(int countOfPluses)
@@ -42,7 +41,7 @@ namespace Automationpractice.PagesObjects
             int count = 1;
             for (int i = 0; i < countOfPluses; i++)
             {
-                IWebElement addToCompareButton = _driver.FindElement(By.XPath(String.Format("//li[{0}]//*[@class='add_to_compare']", count)));
+                IWebElement addToCompareButton = _driver.FindElement(By.XPath(String.Format("//li[{0}]//*[@class='add_to_compare']", count)));                
                 addToCompareButton.Click();
                 Thread.Sleep(1000);
                 count++;
@@ -51,7 +50,7 @@ namespace Automationpractice.PagesObjects
 
         public List<String> getItemsNames(String locator)
         {
-            var storageComparableItems = new List<String>();
+            List<String> storageComparableItems = new List<String>();
             var titleElements = _driver.FindElements(By.XPath(locator));
 
             foreach (IWebElement webElement in titleElements)
@@ -86,7 +85,8 @@ namespace Automationpractice.PagesObjects
             int sliderRangeWidth = sliderRange.Size.Width;            
             actions.DragAndDropToOffset(leftsSlider, ((sliderRangeWidth * 11) / 100), 0).Perform();
             actions = new Actions(_driver);
-            actions.DragAndDropToOffset(rightSlider, ((-sliderRangeWidth * 34) / 100), 0).Perform();                
+            actions.DragAndDropToOffset(rightSlider, ((-sliderRangeWidth * 34) / 100), 0).Perform();
+            //SelectElement oselect = new SelectElement();
         }
 
         public void ComparePriceRange()

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Threading;
+
+
 
 namespace Automationpractice.PagesObjects
 {
@@ -23,44 +21,44 @@ namespace Automationpractice.PagesObjects
         }
 
         [FindsBy(How = How.XPath, Using = "//p[@class='cart_navigation clearfix']//a[@title='Proceed to checkout']")]
-        public IWebElement checkoutSummaryButton;
+        private IWebElement checkoutSummaryButton;
 
         [FindsBy(How = How.XPath, Using = "//button[@name='processAddress']")]
-        public IWebElement checkoutAddressButton;
+        private IWebElement checkoutAddressButton;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='checker']")]
-        public IWebElement agreeShippingCheckBox;
+        private IWebElement agreeShippingCheckBox;
 
         [FindsBy(How = How.XPath, Using = "//button[@name='processCarrier']")]
-        public IWebElement checkoutShippingButton;
+        private IWebElement checkoutShippingButton;
 
         [FindsBy(How = How.XPath, Using = "//a[@class='bankwire']")]
-        public IWebElement payByBankWireButton;
+        private IWebElement payByBankWireButton;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='cart_navigation']//button[@type='submit']")]
-        public IWebElement confirmOrderButton;
+        private IWebElement confirmOrderButton;
 
         [FindsBy(How = How.XPath, Using = "//*[@class='cheque-indent']//strong[@class='dark']")]
-        public IWebElement titleOrder;
+        private IWebElement titleOrder;
 
         [FindsBy(How = How.XPath, Using = "//i[@class='icon-plus']")]
-        public IWebElement increaseQuantityButton;
+        private IWebElement increaseQuantityButton;
 
         [FindsBy(How = How.XPath, Using = "//*[@class='cart_total']//span[@class='price']")]
-        public IWebElement totalCostSummary;
+        private IWebElement totalCostSummary;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='address_invoice']//*[@class='address_update']//a")]
-        public IWebElement updateBillungAddressButton;
+        private IWebElement updateBillungAddressButton;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='alias']")]
-        public IWebElement addressTitleField;
+        private IWebElement addressTitleField;
 
         [FindsBy(How = How.XPath, Using = "//button[@id='submitAddress']")]
-        public IWebElement submitAddressButton;
+        private IWebElement submitAddressButton;
         
         //select[@id='id_address_delivery']//option
         [FindsBy(How = How.XPath, Using = "//*[@class='selector']")]
-        public IWebElement deliveryAddress;
+        private IWebElement deliveryAddress;
 
         public void IncreaseQuantity(int countItem)
         {
@@ -106,9 +104,5 @@ namespace Automationpractice.PagesObjects
             Payment();
             Assert.IsTrue(titleOrder.Text.Equals("Your order on My Store is complete."));
         }
-
-
-
-
     }
 }

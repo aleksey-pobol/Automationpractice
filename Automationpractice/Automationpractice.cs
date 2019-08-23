@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using NUnit.Framework;
 using Automationpractice.PagesObjects;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports;
@@ -15,19 +14,17 @@ namespace Automationpractice
     public class Automationpractice
     {
         private IWebDriver _driver;
-
+        
         private MainPage mainPage;
         private AuthenticationPage authenticationPage;
         private OrderPage orderPage;
         private CheckoutPage checkoutpage;
         private ProductsPage productsPage;
 
-
         private String firstname = "Aleksey";
         private String lasttname = "Pobol";
         private String email = "test3@mail.com";
         private String password = "aleksey96";
-
 
         //---Extent Reporting----------
         private static ExtentTest featureName;
@@ -35,20 +32,20 @@ namespace Automationpractice
         private static ExtentReports extent;
         //------------------------------
 
-
         [SetUp]
         public void SetUpTest()
         {
-            _driver = new ChromeDriver();
-            _driver.Navigate().GoToUrl("http://automationpractice.com/");
+            _driver = new ChromeDriver();            
+            _driver.Url = "http://automationpractice.com";            
             _driver.Manage().Window.Maximize();  
             
+            
 
-            mainPage = new MainPage(_driver);
-            authenticationPage = new AuthenticationPage(_driver);
-            checkoutpage = new CheckoutPage(_driver);
-            orderPage = new OrderPage(_driver);
-            productsPage = new ProductsPage(_driver);
+            mainPage = new MainPage( _driver );
+            authenticationPage = new AuthenticationPage( _driver );
+            checkoutpage = new CheckoutPage( _driver );
+            orderPage = new OrderPage( _driver );
+            productsPage = new ProductsPage( _driver );
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
 
@@ -94,7 +91,7 @@ namespace Automationpractice
         [Test]
         public void CompareItem()
         {
-            mainPage.FindItemFromSubmenu(mainPage.dressesMenuItem, mainPage.casualDressesSubmenuItem);
+            mainPage.GoToCasualDressesSubmenu();
             productsPage.ChooseCountForAddToCompare(3);
             productsPage.CompareItems();            
         }
@@ -102,7 +99,7 @@ namespace Automationpractice
         [Test]
         public void ComparePriceRange()
         {
-            mainPage.GoToMenu(mainPage.dressesMenuItem);
+            mainPage.GoTodDessesMenu();
             productsPage.ChangePriceRange();
             productsPage.ComparePriceRange();
         }
@@ -110,7 +107,7 @@ namespace Automationpractice
         [Test]
         public void JavascriptExecuteTest()
         {
-            mainPage.ScrollPageWithJS();
+            mainPage.ScrollPageByJS();
         }
 
         [TearDown]

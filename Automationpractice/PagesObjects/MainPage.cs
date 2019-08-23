@@ -1,13 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using OpenQA.Selenium.Support.UI;
+
 
 namespace Automationpractice.PagesObjects
 {
@@ -22,25 +21,25 @@ namespace Automationpractice.PagesObjects
         }
 
         [FindsBy(How = How.XPath, Using = "//a[@class='login']")]
-        public IWebElement SignInLink;
+        private IWebElement SignInLink;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='search_query_top']")]
-        public IWebElement searchQueryTopField;
+        private IWebElement searchQueryTopField;
 
         [FindsBy(How = How.XPath, Using = "//*[@class='ac_results']")]
-        public IWebElement resultSearchField;
+        private IWebElement resultSearchField;
 
         [FindsBy(How = How.XPath, Using = "//h1[@itemprop]")]
-        public IWebElement titleTshirtResult;
+        private IWebElement titleTshirtResult;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='block_top_menu']/ul/li[2]")]
-        public IWebElement dressesMenuItem;
+        private IWebElement dressesMenuItem;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='block_top_menu']/ul/li[2]//a[@title='Summer Dresses']")]
-        public IWebElement casualDressesSubmenuItem;
+        private IWebElement casualDressesSubmenuItem;
 
         [FindsBy(How = How.XPath, Using = "//i[@class='icon-th-list']")]
-        public IWebElement viewListButton;
+        private IWebElement viewListButton;
 
         public void GoToAuthenticationPage()
         {
@@ -54,26 +53,25 @@ namespace Automationpractice.PagesObjects
             Assert.IsTrue(titleTshirtResult.Text.Equals(item));           
         }
        
-        public void FindItemFromSubmenu(IWebElement menuLocator, IWebElement submenuLocator)
-        {
+        public void GoToCasualDressesSubmenu()
+        {            
             Actions actions = new Actions(_driver);
-            actions.MoveToElement(menuLocator).Perform();
-            submenuLocator.Click();
+            actions.MoveToElement(dressesMenuItem).Perform();
+            casualDressesSubmenuItem.Click();
             viewListButton.Click(); 
         }
               
-        public void GoToMenu(IWebElement menuLocator)
+        public void GoTodDessesMenu()
         {
-            menuLocator.Click();
+            dressesMenuItem.Click();
         }
 
-        public void ScrollPageWithJS()
+        public void ScrollPageByJS()
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
             int part = 1;
             String script = String.Format("window.scrollTo(0, document.body.scrollHeight * {p})", part);
-            js.ExecuteScript(script);
-
+            js.ExecuteScript(script);           
         }
     }
 }

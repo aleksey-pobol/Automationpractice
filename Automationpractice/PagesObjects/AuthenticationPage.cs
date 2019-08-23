@@ -1,14 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
 
 namespace Automationpractice.PagesObjects
 {
@@ -26,6 +22,7 @@ namespace Automationpractice.PagesObjects
             Random rnd = new Random(Environment.TickCount);
             int value = rnd.Next();
             String EmailAddress = $"test{value}@mail.com";
+
             return EmailAddress;
         }
 
@@ -36,58 +33,58 @@ namespace Automationpractice.PagesObjects
         }
 
         [FindsBy(How = How.XPath, Using = "//input[@name='email_create']")]
-        public IWebElement emailCreateField;
+        private IWebElement emailCreateField;
 
         [FindsBy(How = How.XPath, Using = "//button[@id='SubmitCreate']")]
-        public IWebElement submitCreateButton;
+        private IWebElement submitCreateButton;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='customer_firstname']")]
-        public IWebElement customerFirstnameField;
+        private IWebElement customerFirstnameField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='customer_lastname']")]
-        public IWebElement customerLastameField;
+        private IWebElement customerLastameField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='email']")]
-        public IWebElement emailRegField;
+        private IWebElement emailRegField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='passwd']")]
-        public IWebElement passwdField;
+        private IWebElement passwdField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='address1']")]
-        public IWebElement regAdressField;
+        private IWebElement regAdressField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='city']")]
-        public IWebElement regcityField;
+        private IWebElement regcityField;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='uniform-id_state']")]
-        public IWebElement stateSelector;
+        private IWebElement stateSelector;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='id_state']/option[17]")]
-        public IWebElement chooseState;
+        private IWebElement chooseState;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='postcode']")]
-        public IWebElement postcodeField;
+        private IWebElement postcodeField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='phone_mobile']")]
-        public IWebElement phoneMobileField;
+        private IWebElement phoneMobileField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='alias']")]
-        public IWebElement aliasField;
+        private IWebElement aliasField;
 
         [FindsBy(How = How.XPath, Using = "//button[@id='submitAccount']")]
-        public IWebElement submitAccountButton;
+        private IWebElement submitAccountButton;
 
         [FindsBy(How = How.XPath, Using = "//*[@class='header_user_info']/a/span")]
-        public IWebElement headerUserInfo;
+        private IWebElement headerUserInfo;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='email']")]
-        public IWebElement emailSignInField;
+        private IWebElement emailSignInField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='passwd']")]
-        public IWebElement passwordSignInField;
+        private IWebElement passwordSignInField;
 
         [FindsBy(How = How.XPath, Using = "//button[@id='SubmitLogin']")]
-        public IWebElement submitLoginButton;
+        private IWebElement submitLoginButton;
 
         public void CreateAnAccount()
         {
