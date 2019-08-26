@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Automationpractice.WrapperFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -10,16 +11,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Automationpractice.PagesObjects
 {
-    class MainPage
-    {
-        private readonly IWebDriver _driver;       
-        
-        public MainPage(IWebDriver driver)
-        {
-            _driver = driver;
-            PageFactory.InitElements(_driver, this);
-        }
-
+    public class MainPage
+    {        
         [FindsBy(How = How.XPath, Using = "//a[@class='login']")]
         private IWebElement SignInLink;
 
@@ -55,7 +48,7 @@ namespace Automationpractice.PagesObjects
        
         public void GoToCasualDressesSubmenu()
         {            
-            Actions actions = new Actions(_driver);
+            Actions actions = new Actions( WebDriverFactory.Driver );
             actions.MoveToElement(dressesMenuItem).Perform();
             casualDressesSubmenuItem.Click();
             viewListButton.Click(); 
@@ -68,7 +61,7 @@ namespace Automationpractice.PagesObjects
 
         public void ScrollPageByJS()
         {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+            IJavaScriptExecutor js = (IJavaScriptExecutor)WebDriverFactory.Driver;
             int part = 1;
             String script = String.Format("window.scrollTo(0, document.body.scrollHeight * {p})", part);
             js.ExecuteScript(script);           

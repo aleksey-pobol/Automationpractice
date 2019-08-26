@@ -10,16 +10,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Automationpractice.PagesObjects
 {
-    class OrderPage
-    {
-        private readonly IWebDriver _driver;
-
-        public OrderPage(IWebDriver driver)
-        {
-            _driver = driver;
-            PageFactory.InitElements(_driver, this);
-        }
-
+    public class OrderPage
+    {       
         [FindsBy(How = How.XPath, Using = "//p[@class='cart_navigation clearfix']//a[@title='Proceed to checkout']")]
         private IWebElement checkoutSummaryButton;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Automationpractice.WrapperFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -8,15 +9,13 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Automationpractice.PagesObjects
 {
-    class AuthenticationPage
-    {
-        private readonly IWebDriver _driver;
+    public class AuthenticationPage
+    {        
         private String firstname = "Aleksey";
         private String lasttname = "Pobol";
         private String email = "test3@mail.com";
         private String password = "aleksey96";
-
-
+        
         public String randomEmail()
         {
             Random rnd = new Random(Environment.TickCount);
@@ -24,13 +23,7 @@ namespace Automationpractice.PagesObjects
             String EmailAddress = $"test{value}@mail.com";
 
             return EmailAddress;
-        }
-
-        public AuthenticationPage(IWebDriver driver)
-        {
-            _driver = driver;
-            PageFactory.InitElements(_driver, this);
-        }
+        }        
 
         [FindsBy(How = How.XPath, Using = "//input[@name='email_create']")]
         private IWebElement emailCreateField;
@@ -103,7 +96,7 @@ namespace Automationpractice.PagesObjects
             aliasField.Clear();
             aliasField.SendKeys("Cosmos");
             submitAccountButton.Click();
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait( WebDriverFactory.Driver, TimeSpan.FromSeconds(10) );
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='header_user_info']/a/span")));
             Assert.IsTrue(headerUserInfo.Text.Equals(firstname + ' ' + lasttname));
         }

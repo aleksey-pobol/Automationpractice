@@ -7,16 +7,8 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace Automationpractice.PagesObjects
 {
-    class CheckoutPage
-    {
-        private readonly IWebDriver _driver;
-
-        public CheckoutPage(IWebDriver driver)
-        {
-            _driver = driver;
-            PageFactory.InitElements(_driver, this);
-        }
-
+    public class CheckoutPage
+    {     
         [FindsBy(How = How.XPath, Using = "//button[@name='Submit']")]
         private IWebElement addToCartButton;
 

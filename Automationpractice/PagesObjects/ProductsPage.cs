@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Automationpractice.WrapperFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -10,16 +11,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Automationpractice.PagesObjects
 {
-    class ProductsPage
+    public class ProductsPage
     {
-        private readonly IWebDriver _driver;
-
-        public ProductsPage(IWebDriver driver)
-        {
-            _driver = driver;
-            PageFactory.InitElements(_driver, this);
-        }
-
         [FindsBy(How = How.XPath, Using = "//div[@class='content_sortPagiBar']//button[@type='submit']")]
         private IWebElement submitCompareButton;
 
@@ -35,13 +28,12 @@ namespace Automationpractice.PagesObjects
         [FindsBy(How = How.XPath, Using = "//span[@id='layered_price_range']")]
         private IWebElement priceRange;
         
-
         public void ChooseCountForAddToCompare(int countOfPluses)
         {
             int count = 1;
             for (int i = 0; i < countOfPluses; i++)
             {
-                IWebElement addToCompareButton = _driver.FindElement(By.XPath(String.Format("//li[{0}]//*[@class='add_to_compare']", count)));                
+                IWebElement addToCompareButton = WebDriverFactory.Driver.FindElement(By.XPath(String.Format("//li[{0}]//*[@class='add_to_compare']", count)));                
                 addToCompareButton.Click();
                 Thread.Sleep(1000);
                 count++;
@@ -51,7 +43,7 @@ namespace Automationpractice.PagesObjects
         public List<String> getItemsNames(String locator)
         {
             List<String> storageComparableItems = new List<String>();
-            var titleElements = _driver.FindElements(By.XPath(locator));
+            var titleElements = WebDriverFactory.Driver.FindElements(By.XPath(locator));
 
             foreach (IWebElement webElement in titleElements)
             {
@@ -73,7 +65,7 @@ namespace Automationpractice.PagesObjects
         public void CompareItems()
         {
             List<String> selectedItems = getItemsNames("//ul[@class='product_list row list']//a[@class='product-name']");
-            Actions actions = new Actions(_driver);
+            Actions actions = new Actions( WebDriverFactory.Driver );
             actions.MoveToElement(submitCompareButton).Click().Perform();
             List<String> receivedItems = getItemsNames("//table[@id='product_comparison']//a[@class='product-name']");
             checkItems(selectedItems, receivedItems);
@@ -81,12 +73,11 @@ namespace Automationpractice.PagesObjects
 
         public void ChangePriceRange()
         {
-            Actions actions = new Actions(_driver);            
+            Actions actions = new Actions( WebDriverFactory.Driver );            
             int sliderRangeWidth = sliderRange.Size.Width;            
             actions.DragAndDropToOffset(leftsSlider, ((sliderRangeWidth * 11) / 100), 0).Perform();
-            actions = new Actions(_driver);
-            actions.DragAndDropToOffset(rightSlider, ((-sliderRangeWidth * 34) / 100), 0).Perform();
-            //SelectElement oselect = new SelectElement();
+            actions = new Actions( WebDriverFactory.Driver );
+            actions.DragAndDropToOffset(rightSlider, ((-sliderRangeWidth * 34) / 100), 0).Perform();            
         }
 
         public void ComparePriceRange()
