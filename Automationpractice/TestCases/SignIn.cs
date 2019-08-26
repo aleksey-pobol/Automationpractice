@@ -14,7 +14,7 @@ namespace Automationpractice.TestCases
         public void SignInTest()
         {
             Page.Main.GoToAuthenticationPage();
-            Page.Authentication.SignIn(ConfigurationManager.AppSettings["email"], ConfigurationManager.AppSettings["password"],
+            Page.GetAuthentication().SignIn(ConfigurationManager.AppSettings["email"], ConfigurationManager.AppSettings["password"],
                 ConfigurationManager.AppSettings["firstname"], ConfigurationManager.AppSettings["lasttname"]);
         }
     }

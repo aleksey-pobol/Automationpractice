@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 using Automationpractice.WrapperFactory;
@@ -10,21 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace Automationpractice.PagesObjects
 {
     public class AuthenticationPage
-    {        
-        private String firstname = "Aleksey";
-        private String lasttname = "Pobol";
-        private String email = "test3@mail.com";
-        private String password = "aleksey96";
-        
-        public String randomEmail()
-        {
-            Random rnd = new Random(Environment.TickCount);
-            int value = rnd.Next();
-            String EmailAddress = $"test{value}@mail.com";
-
-            return EmailAddress;
-        }        
-
+    {
         [FindsBy(How = How.XPath, Using = "//input[@name='email_create']")]
         private IWebElement emailCreateField;
 
@@ -79,12 +66,21 @@ namespace Automationpractice.PagesObjects
         [FindsBy(How = How.XPath, Using = "//button[@id='SubmitLogin']")]
         private IWebElement submitLoginButton;
 
+        public String randomEmail()
+        {
+            Random rnd = new Random(Environment.TickCount);
+            int value = rnd.Next();
+            String EmailAddress = $"test{value}@mail.com";
+
+            return EmailAddress;
+        }
+        
         public void CreateAnAccount()
         {
             emailCreateField.SendKeys(randomEmail());
             submitCreateButton.Click();
-            customerFirstnameField.SendKeys(firstname);
-            customerLastameField.SendKeys(lasttname);
+            customerFirstnameField.SendKeys(ConfigurationManager.AppSettings["firstname"]);
+            customerLastameField.SendKeys(ConfigurationManager.AppSettings["lasttname"]);
             emailRegField.Click();
             passwdField.SendKeys("aleksey96");
             regAdressField.SendKeys("Minsk");
@@ -98,7 +94,7 @@ namespace Automationpractice.PagesObjects
             submitAccountButton.Click();
             WebDriverWait wait = new WebDriverWait( WebDriverFactory.Driver, TimeSpan.FromSeconds(10) );
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='header_user_info']/a/span")));
-            Assert.IsTrue(headerUserInfo.Text.Equals(firstname + ' ' + lasttname));
+            Assert.IsTrue(headerUserInfo.Text.Equals(ConfigurationManager.AppSettings["firstname"] + ' ' + ConfigurationManager.AppSettings["lasttname"]));
         }
 
         public void SignIn(String email, String password, String firstname, String lasttname)

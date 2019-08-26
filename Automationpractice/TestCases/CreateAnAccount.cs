@@ -14,7 +14,7 @@ namespace Automationpractice.TestCases
         public void CreateAnAccountTest()
         {
             Page.Main.GoToAuthenticationPage();
-            Page.Authentication.CreateAnAccount();
+            Page.GetAuthentication().CreateAnAccount();
         }
     }
 }

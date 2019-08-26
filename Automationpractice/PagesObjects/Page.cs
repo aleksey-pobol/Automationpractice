@@ -20,29 +20,24 @@ namespace Automationpractice.PagesObjects
 
         public static MainPage Main
         {
-            get { return GetPage<MainPage>(); }
+            get
+            {
+                return GetPage<MainPage>();
+            }
 
         }
 
-        public static AuthenticationPage Authentication
-        {
-            get { return GetPage<AuthenticationPage>(); }
-        }
+        public static AuthenticationPage GetAuthentication() =>
+        GetPage<AuthenticationPage>();
 
-        public static OrderPage Order
-        {
-            get { return GetPage<OrderPage>(); }
-        }
+        public static OrderPage Order =>
+        GetPage<OrderPage>();
 
-        public static CheckoutPage Checkout
-        {
-            get { return GetPage<CheckoutPage>(); }
-        }
+        public static CheckoutPage Checkout =>
+        GetPage<CheckoutPage>();
 
-        public static ProductsPage Products
-        {
-            get { return GetPage<ProductsPage>(); }
-        }
+        public static ProductsPage Products =>
+        GetPage<ProductsPage>();
 
 
     }
