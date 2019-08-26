@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Automationpractice.WrapperFactory;
+﻿using Automationpractice.WrapperFactory;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Automationpractice.PagesObjects

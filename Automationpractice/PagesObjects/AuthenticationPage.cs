@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.Threading;
-using System.Threading.Tasks;
 using Automationpractice.WrapperFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -12,11 +10,14 @@ namespace Automationpractice.PagesObjects
 {
     public class AuthenticationPage
     {
+        private const string _defaultPassword = "aleksey96";
+        private const string _defaultNumber = "+375251234455";
+
         [FindsBy(How = How.XPath, Using = "//input[@name='email_create']")]
-        private IWebElement emailCreateField;
+        private IWebElement _emailCreateField;
 
         [FindsBy(How = How.XPath, Using = "//button[@id='SubmitCreate']")]
-        private IWebElement submitCreateButton;
+        private IWebElement _submitCreateButton;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='customer_firstname']")]
         private IWebElement customerFirstnameField;
@@ -66,33 +67,38 @@ namespace Automationpractice.PagesObjects
         [FindsBy(How = How.XPath, Using = "//button[@id='SubmitLogin']")]
         private IWebElement submitLoginButton;
 
-        public String randomEmail()
+        /*public string GetRandomEmail()
         {
-            Random rnd = new Random(Environment.TickCount);
-            int value = rnd.Next();
-            String EmailAddress = $"test{value}@mail.com";
+            Random random = new Random(Environment.TickCount);
+            int value = random.Next();
+            string emailAddress = $"test{value}@mail.com";
 
-            return EmailAddress;
+            return emailAddress;
+        }*/
+
+        public string GetRandomEmail()
+        {
+            return $"test{DateTime.UtcNow:yyyyMMddmmss}@mail.com";
         }
-        
+
         public void CreateAnAccount()
         {
-            emailCreateField.SendKeys(randomEmail());
-            submitCreateButton.Click();
+            _emailCreateField.SendKeys(GetRandomEmail());
+            _submitCreateButton.Click();
             customerFirstnameField.SendKeys(ConfigurationManager.AppSettings["firstname"]);
             customerLastameField.SendKeys(ConfigurationManager.AppSettings["lasttname"]);
             emailRegField.Click();
-            passwdField.SendKeys("aleksey96");
+            passwdField.SendKeys(_defaultPassword);
             regAdressField.SendKeys("Minsk");
             regcityField.SendKeys("Minsk");
             stateSelector.Click();
             chooseState.Click();
             postcodeField.SendKeys("12345");
-            phoneMobileField.SendKeys("+375251234455");
+            phoneMobileField.SendKeys(_defaultNumber);
             aliasField.Clear();
             aliasField.SendKeys("Cosmos");
             submitAccountButton.Click();
-            WebDriverWait wait = new WebDriverWait( WebDriverFactory.Driver, TimeSpan.FromSeconds(10) );
+            WebDriverWait wait = new WebDriverWait(WebDriverFactory.Driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='header_user_info']/a/span")));
             Assert.IsTrue(headerUserInfo.Text.Equals(ConfigurationManager.AppSettings["firstname"] + ' ' + ConfigurationManager.AppSettings["lasttname"]));
         }

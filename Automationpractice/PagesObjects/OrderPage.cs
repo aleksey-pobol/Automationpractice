@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using OpenQA.Selenium.Support.UI;
-
-
 
 namespace Automationpractice.PagesObjects
 {
     public class OrderPage
-    {       
+    {
         [FindsBy(How = How.XPath, Using = "//p[@class='cart_navigation clearfix']//a[@title='Proceed to checkout']")]
         private IWebElement checkoutSummaryButton;
 
@@ -47,7 +42,7 @@ namespace Automationpractice.PagesObjects
 
         [FindsBy(How = How.XPath, Using = "//button[@id='submitAddress']")]
         private IWebElement submitAddressButton;
-        
+
         //select[@id='id_address_delivery']//option
         [FindsBy(How = How.XPath, Using = "//*[@class='selector']")]
         private IWebElement deliveryAddress;
@@ -71,9 +66,9 @@ namespace Automationpractice.PagesObjects
             updateBillungAddressButton.Click();
             addressTitleField.Clear();
             addressTitleField.SendKeys(address);
-            submitAddressButton.Click();            
+            submitAddressButton.Click();
             //Assert.IsTrue(deliveryAddress.Text.Equals(address));
-            checkoutAddressButton.Click();            
+            checkoutAddressButton.Click();
         }
 
         public void Shipping()

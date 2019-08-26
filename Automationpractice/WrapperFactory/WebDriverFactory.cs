@@ -71,7 +71,7 @@ namespace Automationpractice.WrapperFactory
             foreach (var key in Drivers.Keys)
             {
                 Drivers[key].Close();
-                Drivers[key].Quit();                
+                Drivers[key].Quit();
             }
 
             Drivers.Clear();

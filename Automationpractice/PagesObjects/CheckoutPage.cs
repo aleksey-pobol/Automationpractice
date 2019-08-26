@@ -1,14 +1,11 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
 namespace Automationpractice.PagesObjects
 {
     public class CheckoutPage
-    {     
+    {
         [FindsBy(How = How.XPath, Using = "//button[@name='Submit']")]
         private IWebElement addToCartButton;
 
@@ -33,7 +30,7 @@ namespace Automationpractice.PagesObjects
         {
             IncreaseQuantity(countItem);
             addToCartButton.Click();
-            proceedToCheckoutButton.Click();            
+            proceedToCheckoutButton.Click();
             Assert.IsTrue(navigationPagetTitle.Text.Equals("Your shopping cart"));
         }
     }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using NUnit.Framework;
 using Automationpractice.PagesObjects;
 
 namespace Automationpractice.TestCases
