@@ -10,7 +10,7 @@ using Automationpractice.PagesObjects;
 namespace Automationpractice.TestCases
 {
     class SignIn : Automationpractice
-    {
+    {     
         [Test]
         public void SignInTest()
         {

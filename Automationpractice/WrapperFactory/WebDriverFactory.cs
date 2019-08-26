@@ -5,7 +5,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 
-
 namespace Automationpractice.WrapperFactory
 {
     class WebDriverFactory
@@ -60,8 +59,6 @@ namespace Automationpractice.WrapperFactory
 
                     break;
             }
-
-
         }
 
         public static void GoToUrl(string url)
@@ -74,9 +71,11 @@ namespace Automationpractice.WrapperFactory
             foreach (var key in Drivers.Keys)
             {
                 Drivers[key].Close();
-                Drivers[key].Quit();
+                Drivers[key].Quit();                
             }
-            
+
+            Drivers.Clear();
+            _driver = default;
         }
     }
 }

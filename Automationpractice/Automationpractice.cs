@@ -15,11 +15,11 @@ namespace Automationpractice
 {
     [TestFixture]
     public class Automationpractice
-    {         
+    {
         //---Extent Reporting----------
-        private static ExtentTest featureName;
-        private static ExtentTest scenario;
-        private static ExtentReports extent;
+        private static ExtentTest _featureName;
+        private static ExtentTest _scenario;
+        private static ExtentReports _extent;
         //------------------------------
 
         [SetUp]
@@ -30,28 +30,27 @@ namespace Automationpractice
             WebDriverFactory.Driver.Manage().Window.Maximize();
             WebDriverFactory.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            //---Extent Reporting----------
-            var htmlReporter = new ExtentHtmlReporter(@"D:\ExtentReport.html");
+            //---Extent Reporting----------Это была попытка прикрутить Extent Report
+            var htmlReporter = new ExtentHtmlReporter( @"D:\ExtentReport.html" );
             htmlReporter.Configuration().Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
-            extent = new ExtentReports();
-            extent.AttachReporter(htmlReporter);
-                        
+            _extent = new ExtentReports();
+            _extent.AttachReporter(htmlReporter);
+
             //Feature
-            var feature = extent.CreateTest<Feature>("SignIn");
+            var feature = _extent.CreateTest<Feature>("SignIn");
             //Scenario
             var scenario = feature.CreateNode<Scenario>("Login user as " + ConfigurationManager.AppSettings["firstname"]);
             //Steps
             scenario.CreateNode<Given>("SignIn");
-            //------------------------------
+            //-----------------------------
         }
-        
+
         [TearDown]
         public void TearDownTest()
         {
-            extent.Flush();
-            WebDriverFactory.CloseAllDrivers();
+            _extent.Flush();
+            WebDriverFactory.CloseAllDrivers();            
         }
-
     }
 
 }

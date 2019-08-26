@@ -93,6 +93,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\ExtentReporting.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Automationpractice.cs" />
     <Compile Include="PagesObjects\AuthenticationPage.cs" />
