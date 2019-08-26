@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading;
+using System.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Automationpractice.PagesObjects;
-using System.Configuration;
+
 
 namespace Automationpractice.TestCases
 {

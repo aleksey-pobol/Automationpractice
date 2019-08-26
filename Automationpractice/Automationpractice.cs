@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -8,7 +9,7 @@ using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Gherkin.Model;
 using Automationpractice.WrapperFactory;
-using System.Configuration;
+
 
 namespace Automationpractice
 {
