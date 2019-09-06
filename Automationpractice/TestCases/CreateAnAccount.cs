@@ -4,13 +4,13 @@ using Automationpractice.PagesObjects;
 
 namespace Automationpractice.TestCases
 {
-    class CreateAnAccount : Automationpractice
+    class CreateAnAccount : BaseTest
     {
         [Test]
         public void CreateAnAccountTest()
         {
             Page.Main.GoToAuthenticationPage();
-            Page.GetAuthentication().CreateAnAccount();
+            Page.Authentication.CreateAnAccount();
         }
     }
 }

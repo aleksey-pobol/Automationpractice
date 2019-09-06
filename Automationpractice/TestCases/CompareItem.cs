@@ -3,7 +3,7 @@ using Automationpractice.PagesObjects;
 
 namespace Automationpractice.TestCases
 {
-    class CompareItem : Automationpractice
+    class CompareItem : BaseTest
     {
         [Test]
         public void CompareItemTest()

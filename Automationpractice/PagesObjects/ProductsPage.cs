@@ -12,19 +12,19 @@ namespace Automationpractice.PagesObjects
     public class ProductsPage
     {
         [FindsBy(How = How.XPath, Using = "//div[@class='content_sortPagiBar']//button[@type='submit']")]
-        private IWebElement submitCompareButton;
+        private IWebElement _submitCompareButton;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='layered_price_slider']/a[1]")]
-        private IWebElement leftsSlider;
+        private IWebElement _leftsSlider;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='layered_price_slider']/a[2]")]
-        private IWebElement rightSlider;
+        private IWebElement _rightSlider;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='layered_price_slider']")]
-        private IWebElement sliderRange;
+        private IWebElement _sliderRange;
 
         [FindsBy(How = How.XPath, Using = "//span[@id='layered_price_range']")]
-        private IWebElement priceRange;
+        private IWebElement _priceRange;
 
         public void ChooseCountForAddToCompare(int countOfPluses)
         {
@@ -63,7 +63,7 @@ namespace Automationpractice.PagesObjects
         {
             List<String> selectedItems = getItemsNames("//ul[@class='product_list row list']//a[@class='product-name']");
             Actions actions = new Actions(WebDriverFactory.Driver);
-            actions.MoveToElement(submitCompareButton).Click().Perform();
+            actions.MoveToElement(_submitCompareButton).Click().Perform();
             List<String> receivedItems = getItemsNames("//table[@id='product_comparison']//a[@class='product-name']");
             checkItems(selectedItems, receivedItems);
         }
@@ -71,15 +71,15 @@ namespace Automationpractice.PagesObjects
         public void ChangePriceRange()
         {
             Actions actions = new Actions(WebDriverFactory.Driver);
-            int sliderRangeWidth = sliderRange.Size.Width;
-            actions.DragAndDropToOffset(leftsSlider, ((sliderRangeWidth * 11) / 100), 0).Perform();
+            int sliderRangeWidth = _sliderRange.Size.Width;
+            actions.DragAndDropToOffset(_leftsSlider, ((sliderRangeWidth * 11) / 100), 0).Perform();
             actions = new Actions(WebDriverFactory.Driver);
-            actions.DragAndDropToOffset(rightSlider, ((-sliderRangeWidth * 34) / 100), 0).Perform();
+            actions.DragAndDropToOffset(_rightSlider, ((-sliderRangeWidth * 34) / 100), 0).Perform();
         }
 
         public void ComparePriceRange()
         {
-            Assert.IsTrue(priceRange.Text.Equals("$20.07 - $40.05"));
+            Assert.IsTrue(_priceRange.Text.Equals("$20.07 - $40.05"));
         }
     }
 }

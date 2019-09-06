@@ -10,49 +10,49 @@ namespace Automationpractice.PagesObjects
     public class MainPage
     {
         [FindsBy(How = How.XPath, Using = "//a[@class='login']")]
-        private IWebElement SignInLink;
+        private IWebElement _SignInLink;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='search_query_top']")]
-        private IWebElement searchQueryTopField;
+        private IWebElement _searchQueryTopField;
 
         [FindsBy(How = How.XPath, Using = "//*[@class='ac_results']")]
-        private IWebElement resultSearchField;
+        private IWebElement _resultSearchField;
 
         [FindsBy(How = How.XPath, Using = "//h1[@itemprop]")]
-        private IWebElement titleTshirtResult;
+        private IWebElement _titleTshirtResult;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='block_top_menu']/ul/li[2]")]
-        private IWebElement dressesMenuItem;
+        private IWebElement _dressesMenuItem;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='block_top_menu']/ul/li[2]//a[@title='Summer Dresses']")]
-        private IWebElement casualDressesSubmenuItem;
+        private IWebElement _casualDressesSubmenuItem;
 
         [FindsBy(How = How.XPath, Using = "//i[@class='icon-th-list']")]
-        private IWebElement viewListButton;
+        private IWebElement _viewListButton;
 
         public void GoToAuthenticationPage()
         {
-            SignInLink.Click();
+            _SignInLink.Click();
         }
 
         public void FindItem(String item)
         {
-            searchQueryTopField.SendKeys(item);
-            resultSearchField.Click();
-            Assert.IsTrue(titleTshirtResult.Text.Equals(item));
+            _searchQueryTopField.SendKeys(item);
+            _resultSearchField.Click();
+            Assert.IsTrue(_titleTshirtResult.Text.Equals(item));
         }
 
         public void GoToCasualDressesSubmenu()
         {
             Actions actions = new Actions(WebDriverFactory.Driver);
-            actions.MoveToElement(dressesMenuItem).Perform();
-            casualDressesSubmenuItem.Click();
-            viewListButton.Click();
+            actions.MoveToElement(_dressesMenuItem).Perform();
+            _casualDressesSubmenuItem.Click();
+            _viewListButton.Click();
         }
 
         public void GoTodDessesMenu()
         {
-            dressesMenuItem.Click();
+            _dressesMenuItem.Click();
         }
 
         public void ScrollPageByJS()

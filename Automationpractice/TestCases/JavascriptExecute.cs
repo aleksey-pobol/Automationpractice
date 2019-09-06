@@ -2,7 +2,7 @@
 
 namespace Automationpractice.TestCases
 {
-    class JavascriptExecute: Automationpractice
+    class JavascriptExecute: BaseTest
     {
         [Test]
         public void JavascriptExecuteTest()

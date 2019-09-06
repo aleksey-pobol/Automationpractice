@@ -13,27 +13,14 @@ namespace Automationpractice.PagesObjects
             return page;
         }
 
-        public static MainPage Main
-        {
-            get
-            {
-                return GetPage<MainPage>();
-            }
+        public static MainPage Main => GetPage<MainPage>();
 
-        }
+        public static AuthenticationPage Authentication => GetPage<AuthenticationPage>();
 
-        public static AuthenticationPage GetAuthentication() =>
-        GetPage<AuthenticationPage>();
+        public static OrderPage Order => GetPage<OrderPage>();
 
-        public static OrderPage Order =>
-        GetPage<OrderPage>();
+        public static CheckoutPage Checkout => GetPage<CheckoutPage>();
 
-        public static CheckoutPage Checkout =>
-        GetPage<CheckoutPage>();
-
-        public static ProductsPage Products =>
-        GetPage<ProductsPage>();
-
-
+        public static ProductsPage Products => GetPage<ProductsPage>();
     }
 }

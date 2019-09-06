@@ -3,7 +3,7 @@ using Automationpractice.PagesObjects;
 
 namespace Automationpractice.TestCases
 {
-    class ComparePriceRange : Automationpractice
+    class ComparePriceRange : BaseTest
     {
         [Test]
         public void ComparePriceRangeTest()

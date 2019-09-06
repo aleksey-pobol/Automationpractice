@@ -27,6 +27,7 @@ namespace Automationpractice.WrapperFactory
                 _driver = value;
             }
         }
+
         ///<summary>Available names: Firefox, IE, Chrome</summary>
         public static void InitBrowser(string browserName)
         {
@@ -70,7 +71,6 @@ namespace Automationpractice.WrapperFactory
         {
             foreach (var key in Drivers.Keys)
             {
-                Drivers[key].Close();
                 Drivers[key].Quit();
             }
 

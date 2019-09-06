@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="DnsClient, Version=1.2.0.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
       <HintPath>packages\DnsClient.1.2.0\lib\net471\DnsClient.dll</HintPath>
     </Reference>
@@ -109,6 +112,8 @@
     <Compile Include="TestCases\CreateAnAccount.cs" />
     <Compile Include="TestCases\JavascriptExecute.cs" />
     <Compile Include="TestCases\SignIn.cs" />
+    <Compile Include="TestDataAccess\ExcelDataAccess.cs" />
+    <Compile Include="TestDataAccess\UserData.cs" />
     <Compile Include="WrapperFactory\WebDriverFactory.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +123,7 @@
     </None>
     <None Include="license" />
     <None Include="packages.config" />
+    <None Include="TestDataAccess\TestData.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="extent-config.xml" />

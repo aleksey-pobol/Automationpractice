@@ -6,7 +6,7 @@ using Automationpractice.WrapperFactory;
 namespace Automationpractice
 {
     [TestFixture]
-    public class Automationpractice
+    public class BaseTest
     {
         [SetUp]
         public void SetUpTest()

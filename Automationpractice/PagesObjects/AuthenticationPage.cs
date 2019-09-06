@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using Automationpractice.TestDataAccess;
 using Automationpractice.WrapperFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -20,52 +21,52 @@ namespace Automationpractice.PagesObjects
         private IWebElement _submitCreateButton;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='customer_firstname']")]
-        private IWebElement customerFirstnameField;
+        private IWebElement _customerFirstnameField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='customer_lastname']")]
-        private IWebElement customerLastameField;
+        private IWebElement _customerLastameField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='email']")]
-        private IWebElement emailRegField;
+        private IWebElement _emailRegField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='passwd']")]
-        private IWebElement passwdField;
+        private IWebElement _passwdField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='address1']")]
-        private IWebElement regAdressField;
+        private IWebElement _regAdressField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='city']")]
-        private IWebElement regcityField;
+        private IWebElement _regcityField;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='uniform-id_state']")]
-        private IWebElement stateSelector;
+        private IWebElement _stateSelector;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='id_state']/option[17]")]
-        private IWebElement chooseState;
+        private IWebElement _chooseState;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='postcode']")]
-        private IWebElement postcodeField;
+        private IWebElement _postcodeField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='phone_mobile']")]
-        private IWebElement phoneMobileField;
+        private IWebElement _phoneMobileField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='alias']")]
-        private IWebElement aliasField;
+        private IWebElement _aliasField;
 
         [FindsBy(How = How.XPath, Using = "//button[@id='submitAccount']")]
-        private IWebElement submitAccountButton;
+        private IWebElement _submitAccountButton;
 
         [FindsBy(How = How.XPath, Using = "//*[@class='header_user_info']/a/span")]
-        private IWebElement headerUserInfo;
+        private IWebElement _headerUserInfo;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='email']")]
-        private IWebElement emailSignInField;
+        private IWebElement _emailSignInField;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='passwd']")]
-        private IWebElement passwordSignInField;
+        private IWebElement _passwordSignInField;
 
         [FindsBy(How = How.XPath, Using = "//button[@id='SubmitLogin']")]
-        private IWebElement submitLoginButton;
+        private IWebElement _submitLoginButton;
 
         /*public string GetRandomEmail()
         {
@@ -85,30 +86,38 @@ namespace Automationpractice.PagesObjects
         {
             _emailCreateField.SendKeys(GetRandomEmail());
             _submitCreateButton.Click();
-            customerFirstnameField.SendKeys(ConfigurationManager.AppSettings["firstname"]);
-            customerLastameField.SendKeys(ConfigurationManager.AppSettings["lasttname"]);
-            emailRegField.Click();
-            passwdField.SendKeys(_defaultPassword);
-            regAdressField.SendKeys("Minsk");
-            regcityField.SendKeys("Minsk");
-            stateSelector.Click();
-            chooseState.Click();
-            postcodeField.SendKeys("12345");
-            phoneMobileField.SendKeys(_defaultNumber);
-            aliasField.Clear();
-            aliasField.SendKeys("Cosmos");
-            submitAccountButton.Click();
+            _customerFirstnameField.SendKeys(ConfigurationManager.AppSettings["firstname"]);
+            _customerLastameField.SendKeys(ConfigurationManager.AppSettings["lasttname"]);
+            _emailRegField.Click();
+            _passwdField.SendKeys(_defaultPassword);
+            _regAdressField.SendKeys("Minsk");
+            _regcityField.SendKeys("Minsk");
+            _stateSelector.Click();
+            _chooseState.Click();
+            _postcodeField.SendKeys("12345");
+            _phoneMobileField.SendKeys(_defaultNumber);
+            _aliasField.Clear();
+            _aliasField.SendKeys("Cosmos");
+            _submitAccountButton.Click();
             WebDriverWait wait = new WebDriverWait(WebDriverFactory.Driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='header_user_info']/a/span")));
-            Assert.IsTrue(headerUserInfo.Text.Equals(ConfigurationManager.AppSettings["firstname"] + ' ' + ConfigurationManager.AppSettings["lasttname"]));
+            Assert.IsTrue(_headerUserInfo.Text.Equals(ConfigurationManager.AppSettings["firstname"] + ' ' + ConfigurationManager.AppSettings["lasttname"]));
         }
 
         public void SignIn(String email, String password, String firstname, String lasttname)
         {
-            emailSignInField.SendKeys(email);
-            passwordSignInField.SendKeys(password);
-            submitLoginButton.Click();
-            Assert.IsTrue(headerUserInfo.Text.Equals(firstname + ' ' + lasttname));
+            _emailSignInField.SendKeys(email);
+            _passwordSignInField.SendKeys(password);
+            _submitLoginButton.Click();
+            Assert.IsTrue(_headerUserInfo.Text.Equals(firstname + ' ' + lasttname));
+        }
+        //DDT
+        public void LoginToApplication(string testName)
+        {
+            var userData = ExcelDataAccess.GetTestData(testName);
+            _emailSignInField.SendKeys(userData._emailSignInField);
+            _passwordSignInField.SendKeys(userData._passwordSignInField);
+            _submitLoginButton.Click();
         }
 
 
